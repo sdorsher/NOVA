@@ -1,0 +1,372 @@
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <cstdlib>
+#include <stdlib.h>
+#include <math.h>
+
+using namespace std;
+
+#define WIDTH 42 //number of entries per line in input file
+#define LENGTH 160 //number of lines in input file
+//#define LENGTH 4
+#define NUMPIXELS 32 //number of pixels
+#define NUMVOLTAGEPTS 80
+#define HEADERLENGTH 2
+#define NUMFILES 28
+
+
+int main() {
+
+
+  int i;
+  ifstream infile;
+  ofstream outfile;
+  ifstream keyfile;
+  std::string header;
+  char entry[20];
+  float pixels[LENGTH][NUMPIXELS];
+  int numlines;
+  int pixelnum;
+  char time[10];
+  long shutter_open[LENGTH];
+  float degc[LENGTH];
+  float h2oin[LENGTH];
+  float h2oout[LENGTH];
+  float te_amps[LENGTH];
+  float te_volts[LENGTH];
+  float biasV[LENGTH];
+  float ke237_amps[LENGTH];
+  float pixel_sum[LENGTH];
+
+  float avg0bias;
+  float running_total;
+  float calibrated_pixels[LENGTH][NUMPIXELS];
+  float photo_current[NUMVOLTAGEPTS][NUMPIXELS];
+  float currentM1[NUMPIXELS];
+  float gain[NUMVOLTAGEPTS][NUMPIXELS];
+  float avg_gain[NUMVOLTAGEPTS];
+  long apdnum;
+  int filenum;
+  char filename[40];
+  float set_h20_temp;
+  float set_tec_temp;
+  float breakdownV;
+
+  outfile.open("arrenhiusdata.txt");
+
+  outfile<< "APD" << "\t" << "T" <<"\t" << "V@M100" << "\t" 
+	 <<  "stddevM" <<"\t" << "totalId" << "\t\t"
+	 << "avg bulk Id" <<"\t" << "avg slope invMdMdV" << "\t" 
+	 "breakdown V" <<"\n";
+  
+  keyfile.open("temp_to_filename.txt");
+
+  //read and discard keyfile header
+  std::getline(keyfile,header);
+
+
+  for(filenum=0;filenum<NUMFILES;filenum++){
+    
+    
+    //read in data from keyfile
+    keyfile.getline(entry,20,'\t');
+    apdnum=strtol(entry,NULL,0);
+    keyfile.getline(filename,40,'\t');
+    keyfile.getline(entry,20,'\t');
+    set_h20_temp=strtof(entry,NULL);
+    keyfile.getline(entry,20,'\t');
+    keyfile.getline(entry,20,'\t');
+    set_tec_temp=strtof(entry,NULL);
+    keyfile.getline(entry,20,'\n');
+    breakdownV=strtof(entry,NULL);
+    
+    //cout << apdnum << "\t" << filename << "\t" 
+    //  << set_h20_temp << "\t" << set_tec_temp << "\t" <<  breakdownV <<"\n";
+
+    //open file with data to read
+    infile.open(filename);
+
+    //infile.open("../Data/APD_VI_0019_070718_1609.txt");
+ 
+    //read in and discard header info
+    for(i=0;i<HEADERLENGTH;i++){
+      std::getline(infile,header);
+    }
+    
+
+    // read in and process data
+    for(numlines=0;numlines<LENGTH;numlines++){
+      infile.getline(time, 10, '\t');
+      infile.getline( entry, 20, '\t');
+      shutter_open[numlines]=strtol(entry, NULL,0);
+      infile.getline(entry,20,'\t');
+      degc[numlines]=strtof(entry,NULL);
+      infile.getline(entry,20,'\t');
+      h2oin[numlines]=strtof(entry,NULL);
+      infile.getline(entry,20,'\t');
+      h2oout[numlines]=strtof(entry,NULL);
+      infile.getline(entry,20,'\t');
+      te_amps[numlines]=strtof(entry,NULL);
+      infile.getline(entry,20,'\t');
+      te_volts[numlines]=strtof(entry,NULL);
+      infile.getline(entry,20,'\t');
+      biasV[numlines]=strtof(entry,NULL);
+      infile.getline(entry,20,'\t');
+      ke237_amps[numlines]=strtof(entry,NULL);
+      infile.getline(entry,20,'\t');
+      pixel_sum[numlines]=strtof(entry,NULL);
+      
+      for(pixelnum=0;pixelnum<NUMPIXELS-1;pixelnum++){
+	infile.getline(entry,20,'\t');
+	pixels[numlines][pixelnum]=strtof(entry,NULL);
+      }
+      infile.getline(entry,20,'\n');
+      pixels[numlines][NUMPIXELS-1]=strtof(entry,NULL);
+      
+      //cout << te_amps[numlines] << '\t' << pixels[numlines][0] << "\t" << pixels[numlines][NUMPIXELS-1] <<"\t"<< numlines+1 << "\n";
+    }
+    
+    infile.close();
+    //end input
+  
+    //begin repeating calcsheet calculations
+    //find average 0 bias current for calibration
+    running_total=0.;
+    for(numlines=0;numlines<2;numlines++){
+      for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+	running_total=running_total+pixels[numlines][pixelnum];
+      }
+    }
+    avg0bias=running_total/(2.0*NUMPIXELS);
+    cout << "avg0bias=" << avg0bias <<"\n";
+    
+    //calibrate current measurements by subtracting avg0bias
+    for(numlines=0;numlines<LENGTH;numlines++){
+      for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+	calibrated_pixels[numlines][pixelnum]=pixels[numlines][pixelnum]-avg0bias;
+      }
+    }
+    
+    //cout << "calibrated pixels " << calibrated_pixels[LENGTH-1][0] <<"\n";
+    //find photocurrent= light current-dark current-avg0bias
+    for(numlines=0;numlines<NUMVOLTAGEPTS;numlines++){
+      for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+	photo_current[numlines][pixelnum]=calibrated_pixels[numlines+NUMVOLTAGEPTS][pixelnum]-calibrated_pixels[numlines][pixelnum]-avg0bias;
+      }
+    }
+    //    cout << "photocurrent " << photo_current[0][0] << "\t"
+    //	 <<photo_current[NUMVOLTAGEPTS-1][0] <<"\n";
+    
+    //find current (M=1), which is the average photo current in the low bias (M=1) regime for only those pixels whose high bias
+    //behavior is reasonable (avg >0) and whose calibrated current is on average reasonable (avg>0)
+    float avg_calibrated_current[NUMPIXELS];
+    float avg_highbiasphoto_current[NUMPIXELS];
+    float current_m1[NUMPIXELS];
+    
+    //find avg_calibrated_current
+    for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+      running_total=0.;
+      for(numlines=0;numlines<LENGTH;numlines++){
+	running_total=running_total+calibrated_pixels[numlines][pixelnum];
+      }
+      //cout << running_total <<"\n";
+      avg_calibrated_current[pixelnum]=running_total/(1.0*LENGTH*NUMPIXELS); 
+      //cout << avg_calibrated_current[pixelnum] <<"\n";
+    }
+    
+    //find avg_highbiasphoto_current
+    for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+      running_total=0.;
+      for(numlines=NUMVOLTAGEPTS-30;numlines<LENGTH;numlines++){
+	running_total=running_total+photo_current[numlines][pixelnum];
+      }
+      //cout << photo_current[NUMVOLTAGEPTS-30][pixelnum] <<"\n";
+      avg_highbiasphoto_current[pixelnum]=running_total/(1.0*NUMPIXELS*30.);
+      //cout <<avg_highbiasphoto_current[pixelnum] << "\n"; 
+    }
+
+    //find current_m1. denote cases where the avg highbiasphotocurrent or the avg calibrated current are unreasonable with "999" since that
+    // value should never come up naturally
+    for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+      running_total=0.;
+      if((avg_calibrated_current[pixelnum]>0)&&(avg_highbiasphoto_current[pixelnum]>0)){
+	for(numlines=4;numlines<12;numlines++){
+	  running_total=running_total+photo_current[numlines][pixelnum];
+	}
+	current_m1[pixelnum]=running_total/8.;
+      }else{
+	current_m1[pixelnum]=999.;
+      }
+    }
+    
+    //cout << current_m1[0] <<"\t" <<current_m1[1] << "\t" << current_m1[2] <<"\t" <<current_m1[3] <<"\n";
+    
+    int numpixelsinsum;
+    //calculate gain if current_m1 is a number for that pixel (<998).
+    for(numlines=0;numlines<NUMVOLTAGEPTS;numlines++){
+      running_total=0.;
+      numpixelsinsum=0;
+      for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+	if(current_m1[pixelnum]<998.){
+	  gain[numlines][pixelnum]=photo_current[numlines][pixelnum]/current_m1[pixelnum];
+	  numpixelsinsum++;
+	  running_total=running_total+gain[numlines][pixelnum];
+	}else{
+	  gain[numlines][pixelnum]=-999.;}
+      }
+      avg_gain[numlines]=running_total/(1.0*numpixelsinsum);
+      //cout<< avg_gain[numlines] <<"\n";
+    }
+    
+    //calculate bulk dark current=dark current over gain
+    float bulk_dark_current[NUMVOLTAGEPTS][NUMPIXELS];
+    for(numlines=0;numlines<NUMVOLTAGEPTS;numlines++){
+      for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+	if(gain[numlines][pixelnum]>-998.){
+	  bulk_dark_current[numlines][pixelnum]=calibrated_pixels[numlines][pixelnum]/gain[numlines][pixelnum];
+	}else{
+	  bulk_dark_current[numlines][pixelnum]=999.;}
+      }
+      //cout << bulk_dark_current[numlines][0] <<"\n";
+    }
+    
+    //calculate 1/M dM/dV=invMdMdV. if doesn't exist, equals -999.
+    float invMdMdV[NUMVOLTAGEPTS][NUMPIXELS];
+    for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+      invMdMdV[0][pixelnum]=0.;
+      invMdMdV[1][pixelnum]=0.;
+    }
+    for(numlines=2;numlines<NUMVOLTAGEPTS;numlines++){
+      for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){       
+	if((gain[numlines][pixelnum]>-998.)&&(gain[numlines-1][pixelnum]>-998.)){
+	  invMdMdV[numlines][pixelnum]=1./gain[numlines][pixelnum]*(gain[numlines][pixelnum]-gain[numlines-1][pixelnum])/
+	    (biasV[numlines]-biasV[numlines-1]);
+	}
+	else{
+	  invMdMdV[numlines][pixelnum]=-999.;
+	}
+      }
+      //cout << invMdMdV[numlines][0] << "\n";
+    }
+    cout << "invMdMdV pixel A1 biasV " << biasV[NUMVOLTAGEPTS-1] 
+	 << "\t" <<invMdMdV[NUMVOLTAGEPTS-1][0] <<"\n";
+    
+
+    
+    //now we're moving on to new stuff. What do I need to make arrenhius plots? 
+    //find average temperature of data set that was actually measured
+    float measuredT;
+    running_total=0.;
+    for(numlines=0;numlines<NUMVOLTAGEPTS;numlines++){
+      running_total=running_total+degc[numlines];
+    }
+    measuredT=running_total/(1.0*NUMVOLTAGEPTS);
+    cout << "measured temperature = " << measuredT <<"\n";
+    
+    //identify numlines at either side of <M>=100.
+    int top, bottom;
+    numlines=0;
+    while(avg_gain[numlines]<100.){
+      numlines++;
+    }
+    cout << "gain to either side of 100 is " << avg_gain[numlines-1] << "\t" << avg_gain[numlines] << "\n";
+    top=numlines;
+    bottom=numlines-1;
+   
+    //find weight for interpolation. 
+    float weight;
+    weight=(100.-avg_gain[bottom])/(avg_gain[top]-avg_gain[bottom]);
+    
+    //find stddev of M at either side of <M>=100. interpolate.
+    float stddev_gain_top;
+    float stddev_gain_bottom;
+    float stddev_gain;
+    running_total=0.;
+    for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+      running_total=running_total+(gain[top][pixelnum]-avg_gain[top])*
+	(gain[top][pixelnum]-avg_gain[top]);
+    }
+    stddev_gain_top=pow(running_total/(1.0*NUMPIXELS),0.5);
+    running_total=0.;
+    for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+      running_total=running_total+(gain[bottom][pixelnum]-avg_gain[bottom])*
+	(gain[bottom][pixelnum]-avg_gain[bottom]);
+    }
+    stddev_gain_bottom=sqrt(running_total/(1.0*NUMPIXELS));
+    stddev_gain=weight*(stddev_gain_top-stddev_gain_bottom)+stddev_gain_bottom;
+    cout << "stddev_gain= " << stddev_gain;
+    
+    //interpolate and find V at <M>=100
+    float vatm100;
+    vatm100=weight*(biasV[top]-biasV[bottom])+biasV[bottom];
+    cout << "V below 100 " << biasV[bottom] << "\t V above 100 " << biasV[top]
+	 << "\n V at 100 " << vatm100 << "\n";
+    
+    //find sum of pixel dark currents at either side of 100. interpolate.
+    float total_dark_current_top;
+    float total_dark_current_bottom;
+    float total_dark_current;
+    running_total=0.;
+    for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+      running_total=running_total+calibrated_pixels[top][pixelnum];
+    }
+    total_dark_current_top=running_total;
+    running_total=0.;
+    for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+      running_total=running_total+calibrated_pixels[bottom][pixelnum];
+    }
+    total_dark_current_bottom=running_total;
+    total_dark_current=weight*(total_dark_current_top-total_dark_current_bottom)
+      +total_dark_current_bottom;
+    cout << "total dark current " << total_dark_current << "\n";
+    
+    //find avg of pixel bulk dark currents at either side of <M>=100. 
+    //interpolate.
+    float avg_bulk_dc_bottom, avg_bulk_dc_top, avg_bulk_dc;
+    running_total=0.;
+    for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+      running_total=running_total+bulk_dark_current[top][pixelnum];
+    }
+    avg_bulk_dc_top=running_total/(1.0*NUMPIXELS);
+    for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+      running_total=running_total+bulk_dark_current[bottom][pixelnum];
+    }
+    avg_bulk_dc_bottom=running_total/(1.0*NUMPIXELS);
+    avg_bulk_dc=weight*(avg_bulk_dc_top-avg_bulk_dc_bottom)
+      +avg_bulk_dc_bottom;
+    cout << "pixel averaged bulk dark current " << avg_bulk_dc <<"\n";
+    
+    //find average slope of 1/M dM/dV
+    float avg_slope_invMdMdV[NUMPIXELS];
+    float apd_avg_slope_invMdMdV;
+    
+    for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+      avg_slope_invMdMdV[pixelnum]=
+	(invMdMdV[NUMVOLTAGEPTS-1][pixelnum]-invMdMdV[2][pixelnum])/
+	(biasV[NUMVOLTAGEPTS-1]-biasV[2]);
+    }
+    running_total=0.;
+    for(pixelnum=0;pixelnum<NUMPIXELS;pixelnum++){
+      running_total=running_total+avg_slope_invMdMdV[pixelnum];
+    }     
+    apd_avg_slope_invMdMdV=running_total/(1.*NUMPIXELS);
+    cout << "avg slope of 1/M dM/dV averaged over all pixels " 
+	 << apd_avg_slope_invMdMdV << "\n";
+    
+    //output measuredT, stddev_gain, vatm100, total_dark_current, 
+    //avg_bulk_dc, apd_avg_slope_invMdMdV
+    
+    
+    outfile<< apdnum << "\t" << measuredT <<"\t" << vatm100 << "\t" 
+	   <<  stddev_gain <<"\t" << total_dark_current << "\t"
+	   << avg_bulk_dc <<"\t" << apd_avg_slope_invMdMdV 
+	   << "\t" << breakdownV << "\n";
+    
+    
+  }
+  //temperature_to_filename.close();
+  outfile.close();
+  keyfile.close();
+  return 0;
+}

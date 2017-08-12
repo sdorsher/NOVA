@@ -1,0 +1,280 @@
+16	../Data/APD_VI_0016_070627_1331.txt	25	999	426.7
+avg0bias=-4.70246e-12
+invMdMdV pixel A1 biasV 435.988	0.0474021
+measured temperature = 27.2314
+gain to either side of 100 is 94.9425	103.799
+stddev_gain= 5.19258V below 100 434.288	 V above 100 435.988
+ V at 100 435.259
+total dark current 2.61457e-07
+pixel averaged bulk dark current 1.17036e-10
+avg slope of 1/M dM/dV averaged over all pixels 0.000107
+16	../Data/APD_VI_0016_070704_1616.txt	20	999	442
+avg0bias=-5.6912e-12
+invMdMdV pixel A1 biasV 436.987	0.0508446
+measured temperature = 23.208
+gain to either side of 100 is 96.4853	105.24
+stddev_gain= 5.20993V below 100 431.788	 V above 100 433.521
+ V at 100 432.484
+total dark current 2.06432e-07
+pixel averaged bulk dark current 1.03399e-10
+avg slope of 1/M dM/dV averaged over all pixels 0.000118795
+16	../Data/APD_VI_0016_070704_1705.txt	15	999	442
+avg0bias=-6.71206e-12
+invMdMdV pixel A1 biasV 436.986	0.0579562
+measured temperature = 19.6736
+gain to either side of 100 is 94.604	103.557
+stddev_gain= 5.37978V below 100 428.322	 V above 100 430.055
+ V at 100 429.366
+total dark current 1.60082e-07
+pixel averaged bulk dark current 7.008e-11
+avg slope of 1/M dM/dV averaged over all pixels 0.00013766
+16	../Data/APD_VI_0016_070709_1628.txt	25	10	439.9
+avg0bias=-8.31962e-12
+invMdMdV pixel A1 biasV 434.881	0.0865655
+measured temperature = 10.0161
+gain to either side of 100 is 97.727	102.129
+stddev_gain= 5.45219V below 100 421.611	 V above 100 422.441
+ V at 100 422.04
+total dark current 8.40992e-08
+pixel averaged bulk dark current 3.90978e-11
+avg slope of 1/M dM/dV averaged over all pixels 0.000231701
+16	../Data/APD_VI_0016_070709_1530.txt	25	5	437.3
+avg0bias=-8.29969e-12
+invMdMdV pixel A1 biasV 432.328	0.0913631
+measured temperature = 5.01539
+gain to either side of 100 is 96.9908	101.32
+stddev_gain= 5.44565V below 100 417.443	 V above 100 418.187
+ V at 100 417.96
+total dark current 5.86459e-08
+pixel averaged bulk dark current 2.39752e-11
+avg slope of 1/M dM/dV averaged over all pixels 0.000253256
+16	../Data/APD_VI_0016_070709_1430.txt	25	0	434.5
+avg0bias=-8.74624e-12
+invMdMdV pixel A1 biasV 429.461	0.120647
+measured temperature = 0.0113351
+gain to either side of 100 is 99.5355	102.983
+stddev_gain= 5.44403V below 100 413.892	 V above 100 414.541
+ V at 100 413.98
+total dark current 4.05429e-08
+pixel averaged bulk dark current 2.36943e-11
+avg slope of 1/M dM/dV averaged over all pixels 0.000344893
+16	../Data/APD_VI_0016_070709_1329.txt	25	-5	435.2
+avg0bias=-8.80598e-12
+invMdMdV pixel A1 biasV 430.188	0.205355
+measured temperature = -4.99077
+gain to either side of 100 is 91.1079	101.179
+stddev_gain= 5.71811V below 100 408	 V above 100 410
+ V at 100 409.766
+total dark current 2.75764e-08
+pixel averaged bulk dark current 9.65201e-12
+avg slope of 1/M dM/dV averaged over all pixels 0.000674005
+16	../Data/APD_VI_0016_070709_1149.txt	25	-10	427.5
+avg0bias=-1.81742e-11
+invMdMdV pixel A1 biasV 422.489	0.127963
+measured temperature = -9.99224
+gain to either side of 100 is 93.7233	104.569
+stddev_gain= 5.68879V below 100 406	 V above 100 408
+ V at 100 407.157
+total dark current 2.05621e-08
+pixel averaged bulk dark current 9.15519e-12
+avg slope of 1/M dM/dV averaged over all pixels 0.000411736
+16	../Data/APD_VI_0016_070628_1052.txt	15	-15	441
+avg0bias=-8.49495e-12
+invMdMdV pixel A1 biasV 420.628	0.150555
+measured temperature = -15.0019
+gain to either side of 100 is 99.566	106.198
+stddev_gain= 5.73427V below 100 401.626	 V above 100 402.814
+ V at 100 401.704
+total dark current 1.25234e-08
+pixel averaged bulk dark current 7.59274e-12
+avg slope of 1/M dM/dV averaged over all pixels 0.000515152
+16	../Data/APD_VI_0016_070703_1336.txt	15	-20	425.7
+avg0bias=-9.56438e-12
+invMdMdV pixel A1 biasV 420.691	0.325773
+measured temperature = -20.0188
+gain to either side of 100 is 94.7398	101.233
+stddev_gain= 6.29455V below 100 396.897	 V above 100 398.087
+ V at 100 397.861
+total dark current 1.21313e-08
+pixel averaged bulk dark current 4.69509e-12
+avg slope of 1/M dM/dV averaged over all pixels 0.000136329
+17	../Data/APD_VI_0017_070628_1321.txt	25	999	449.1
+avg0bias=-4.32639e-12
+invMdMdV pixel A1 biasV 444.06	0.0435743
+measured temperature = 28.2649
+gain to either side of 100 is 3.9605e-11	2.81751e+20
+stddev_gain= infV below 100 30	 V above 100 40
+ V at 100 30
+total dark current 4.23393e-09
+pixel averaged bulk dark current 0.000596443
+avg slope of 1/M dM/dV averaged over all pixels 9.3639e-05
+17	../Data/APD_VI_0017_070713_1134.txt	20	999	442.2
+avg0bias=-5.72449e-12
+invMdMdV pixel A1 biasV 442.259	0.0473387
+measured temperature = 24.571
+gain to either side of 100 is 95.5331	101.258
+stddev_gain= 9.4266V below 100 440.109	 V above 100 441.184
+ V at 100 440.948
+total dark current 1.71741e-07
+pixel averaged bulk dark current 6.58577e-11
+avg slope of 1/M dM/dV averaged over all pixels 0.000105154
+17	../Data/APD_VI_0017_070713_1040.txt	15	999	444.8
+avg0bias=-6.63803e-12
+invMdMdV pixel A1 biasV 439.836	0.0470778
+measured temperature = 20.3575
+gain to either side of 100 is 94.9391	100.244
+stddev_gain= 9.48658V below 100 436.853	 V above 100 437.847
+ V at 100 437.801
+total dark current 1.31845e-07
+pixel averaged bulk dark current 4.33606e-11
+avg slope of 1/M dM/dV averaged over all pixels 0.000112402
+17	../Data/APD_VI_0017_070710_1624.txt	25	10	438.6
+avg0bias=-7.92082e-12
+invMdMdV pixel A1 biasV 433.603	0.0536288
+measured temperature = 10.0144
+gain to either side of 100 is 96.8987	101.321
+stddev_gain= 9.74883V below 100 428.882	 V above 100 429.669
+ V at 100 429.434
+total dark current 6.38251e-08
+pixel averaged bulk dark current 2.60784e-11
+avg slope of 1/M dM/dV averaged over all pixels 0.000125506
+17	../Data/APD_VI_0017_070710_1717.txt	25	5	435.7
+avg0bias=-8.81271e-12
+invMdMdV pixel A1 biasV 430.694	0.0580967
+measured temperature = 5.01566
+gain to either side of 100 is 97.5695	101.288
+stddev_gain= 9.62718V below 100 425.175	 V above 100 425.865
+ V at 100 425.626
+total dark current 4.49019e-08
+pixel averaged bulk dark current 1.90162e-11
+avg slope of 1/M dM/dV averaged over all pixels 0.000139522
+17	../Data/APD_VI_0017_070712_1310.txt	25	0	435.5
+avg0bias=-8.62812e-12
+invMdMdV pixel A1 biasV 430.511	0.0677084
+measured temperature = 0.00668924
+gain to either side of 100 is 99.6194	103.49
+stddev_gain= 9.57928V below 100 421.623	 V above 100 422.307
+ V at 100 421.69
+total dark current 3.11173e-08
+pixel averaged bulk dark current 1.86162e-11
+avg slope of 1/M dM/dV averaged over all pixels 0.000223111
+17	../Data/APD_VI_0017_070712_1516.txt	25	-5	435.3
+avg0bias=-8.51175e-12
+invMdMdV pixel A1 biasV 430.328	-2.0079
+measured temperature = -4.99503
+gain to either side of 100 is 99.9276	103.001
+stddev_gain= 9.50738V below 100 417.454	 V above 100 418.131
+ V at 100 417.47
+total dark current 2.12149e-08
+pixel averaged bulk dark current 1.31907e-11
+avg slope of 1/M dM/dV averaged over all pixels -0.518163
+17	../Data/APD_VI_0017_070712_1639.txt	25	-10	426.2
+avg0bias=-8.34854e-12
+invMdMdV pixel A1 biasV 421.237	0.0496503
+measured temperature = -9.99493
+gain to either side of 100 is 99.1293	101.392
+stddev_gain= 9.48179V below 100 413.371	 V above 100 413.746
+ V at 100 413.515
+total dark current 1.43941e-08
+pixel averaged bulk dark current 7.31501e-12
+avg slope of 1/M dM/dV averaged over all pixels 0.000124139
+17	../Data/APD_VI_0017_070628_1233.txt	15	-15	425.6
+avg0bias=-9.19966e-12
+invMdMdV pixel A1 biasV 420.58	0.0730218
+measured temperature = -15.0003
+gain to either side of 100 is 94.0202	100.157
+stddev_gain= 9.32367V below 100 408.72	 V above 100 409.906
+ V at 100 409.875
+total dark current 9.96182e-09
+pixel averaged bulk dark current 3.21198e-12
+avg slope of 1/M dM/dV averaged over all pixels 0.000229636
+17	../Data/APD_VI_0017_070713_0945.txt	15	-20	425.3
+avg0bias=-8.79628e-12
+invMdMdV pixel A1 biasV 420.285	1.86701
+measured temperature = -20.0009
+gain to either side of 100 is 92.6745	103.219
+stddev_gain= 9.36119V below 100 404	 V above 100 406
+ V at 100 405.389
+total dark current 6.34086e-09
+pixel averaged bulk dark current 2.60374e-12
+avg slope of 1/M dM/dV averaged over all pixels -0.153218
+18	../Data/APD_VI_0018_070628_1434.txt	25	999	448.9
+avg0bias=-4.23325e-12
+invMdMdV pixel A1 biasV 443.88	0.0534284
+measured temperature = 28.2955
+gain to either side of 100 is 99.9687	111.377
+stddev_gain= 8.5325V below 100 437.992	 V above 100 439.955
+ V at 100 437.998
+total dark current 2.09199e-07
+pixel averaged bulk dark current 1.30366e-10
+avg slope of 1/M dM/dV averaged over all pixels 0.000126449
+18	../Data/APD_VI_0018_070713_1234.txt	20	999	447.1
+avg0bias=-5.8576e-12
+invMdMdV pixel A1 biasV 442.126	0.0567665
+measured temperature = 24.2636
+gain to either side of 100 is 96.5206	101.936
+stddev_gain= 8.79654V below 100 434.63	 V above 100 435.701
+ V at 100 435.318
+total dark current 1.64753e-07
+pixel averaged bulk dark current 6.97964e-11
+avg slope of 1/M dM/dV averaged over all pixels 0.000137949
+18	../Data/APD_VI_0018_070713_1337.txt	15	999	445.1
+avg0bias=-6.74584e-12
+invMdMdV pixel A1 biasV 440.127	0.0585833
+measured temperature = 20.1524
+gain to either side of 100 is 95.243	100.109
+stddev_gain= 8.63544V below 100 431.089	 V above 100 432.094
+ V at 100 432.071
+total dark current 1.25704e-07
+pixel averaged bulk dark current 4.01073e-11
+avg slope of 1/M dM/dV averaged over all pixels 0.000150814
+18	../Data/APD_VI_0018_070716_1514.txt	25	10	438.6
+avg0bias=-8.26112e-12
+invMdMdV pixel A1 biasV 433.621	0.0653389
+measured temperature = 10.0155
+gain to either side of 100 is 96.1486	100.113
+stddev_gain= 8.8674V below 100 423.385	 V above 100 424.172
+ V at 100 424.15
+total dark current 6.28488e-08
+pixel averaged bulk dark current 2.01695e-11
+avg slope of 1/M dM/dV averaged over all pixels 0.000172245
+18	../Data/APD_VI_0018_070716_1354.txt	25	5	435.6
+avg0bias=-8.83147e-12
+invMdMdV pixel A1 biasV 430.549	0.0722919
+measured temperature = 5.01511
+gain to either side of 100 is 97.1481	100.829
+stddev_gain= 8.91016V below 100 419.59	 V above 100 420.275
+ V at 100 420.12
+total dark current 4.39697e-08
+pixel averaged bulk dark current 1.68107e-11
+avg slope of 1/M dM/dV averaged over all pixels 0.000197294
+18	../Data/APD_VI_0018_070716_1308.txt	25	0	435.6
+avg0bias=-8.44978e-12
+invMdMdV pixel A1 biasV 430.517	0.0941756
+measured temperature = 0.0107679
+gain to either side of 100 is 96.8791	100.491
+stddev_gain= 8.98131V below 100 415.471	 V above 100 416.155
+ V at 100 416.062
+total dark current 3.01928e-08
+pixel averaged bulk dark current 1.07026e-11
+avg slope of 1/M dM/dV averaged over all pixels -0.000163239
+18	../Data/APD_VI_0018_070716_1212.txt	25	-5	435.6
+avg0bias=-8.97235e-12
+invMdMdV pixel A1 biasV 430.589	1.50783
+measured temperature = -4.99064
+gain to either side of 100 is 96.6432	100.333
+stddev_gain= 9.04438V below 100 411.373	 V above 100 412.059
+ V at 100 411.997
+total dark current 2.0622e-08
+pixel averaged bulk dark current 7.01603e-12
+avg slope of 1/M dM/dV averaged over all pixels -0.368445
+18	../Data/APD_VI_0018_070713_1602.txt	25	-10	426.1
+avg0bias=-9.19393e-12
+invMdMdV pixel A1 biasV 421.068	0.0962725
+measured temperature = -9.99669
+gain to either side of 100 is 99.324	111.318
+stddev_gain= 9.28669V below 100 408	 V above 100 410
+ V at 100 408.113
+total dark current 1.39721e-08
+pixel averaged bulk dark current 8.48352e-12
+avg slope of 1/M dM/dV averaged over all pixels 0.000297064

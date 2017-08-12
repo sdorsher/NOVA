@@ -1,0 +1,7 @@
+need to finish filling in temp_to_filename with final file and replace old ones as I redo them
+
+
+then: calibrate temperature in calcsheet program and redo plots. 
+
+later: make sure it runs in root. translate it to use rootisms.
+later: redo calculations for avg slope of invMdMdV in root. find best fit slope instead of avg slope.

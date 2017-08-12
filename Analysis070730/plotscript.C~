@@ -1,0 +1,15 @@
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <cstdlib>
+
+using namespace std;
+
+#define NUMLINES 40
+#define HEADERLENGTH 1
+
+int main(){
+
+
+
+}

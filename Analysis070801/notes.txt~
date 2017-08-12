@@ -1,0 +1,10 @@
+need to finish filling in temp_to_filename with final file and replace old ones as I redo them
+
+redo avg slope of invMdMdV. this really should use more than two
+points. also, sometimes it is producing unrealistic (negative or very
+small) results.
+
+
+then: calibrate temperature in calcsheet program and redo plots. 
+
+later: make sure it runs in root. translate it to use rootisms.

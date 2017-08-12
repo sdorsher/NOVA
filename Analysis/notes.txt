@@ -1,0 +1,8 @@
+need to finish filling in temp_to_filename with final file and replace old ones as I redo them
+
+need to make sure something catches if top runs over NUMVOLTAGEPTS. retake data for these files?
+
+next: run loop over all files. produce output file to read into root. copy all files over to linux if necessary
+next: write root script using TGraph to read and plot file produced by calcsheet.C called arrenhiusdata.txt
+
+later: make sure it runs in root. translate it to use rootisms.
